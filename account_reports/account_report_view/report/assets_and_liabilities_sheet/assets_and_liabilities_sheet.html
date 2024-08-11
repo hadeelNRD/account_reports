@@ -35,10 +35,12 @@
 		align-items: flex-start;
 	}
 	.asset-bg, .print-format th.asset-bg{
-		background-color: #97D49B !important;
+		background-color: #738580 !important;
+		color: #222 !important;
 	}
 	.lib-bg, .print-format th.lib-bg{
-		background-color: #ECF87F !important;
+		background-color: #BFCAD0 !important;
+		color: #222 !important;
 	}
 	.table-bordered > thead > tr > th, .table-bordered > tbody > tr > td{
 		border: 1px solid #222 !important;
@@ -48,7 +50,7 @@
 	}
 </style>
 <hr>
-<h2 class="text-center" style="color: #386a77 !important">{%= __("Balance Sheet As in") %} - {{filters.period_start_date}} :- {{filters.period_end_date}}  </h2>
+<h2 class="text-center" style="color: #222 !important">{%= __("Balance Sheet As in") %} - {{filters.period_start_date}} :- {{filters.period_end_date}}  </h2>
 </h2>
 <div class="content">
 	<!------- Liabilities ------->
@@ -61,10 +63,33 @@
 				<th class="text-center lib-bg">{%= __("No.") %}</th>
 				<th class="text-center lib-bg">{%= __("Short Term Liabilities") %}</th>
 				{% for (let i=1, l=report_columns.length; i<l; i++) { %}
-					<th class="text-right" style="background-color: #CDC6CF !important;">{%= report_columns[i].label %}</th>
+					<th class="text-right" style="background-color: #CDC6CF !important; color: #222 !important;">{%= report_columns[i].label %}</th>
 				{% } %}
 			</tr>
 		</thead>
+		{% 
+			var ass_count = 0; 
+			var lib_count = 0;
+		
+		%}
+		{% for(let j=0, k=data.length; j<k; j++) { %}
+		{%
+			var row = data[j];
+			var row_class = data[j].parent_account ? "" : "financial-statements-important lib-bg";
+			row_class += data[j].account_name ? "" : " financial-statements-blank-row";
+		%}
+		{% if row.root_type == 'asset' %}
+		{% if row.account %}
+			{% ass_count = ass_count + 1 %}
+		{% endif %}
+		{% endif %}
+		{% if row.root_type == 'liability' %}
+		{% if row.account %}
+			{% lib_count = lib_count + 1 %}
+		{% endif %}
+		{% endif %}
+		{% } %}
+		{% var diff = ass_count - lib_count; %}
 		<tbody>
 			{% 
 				var ass_count = 0; 
@@ -77,9 +102,19 @@
 					var row_class = data[j].parent_account ? "" : "financial-statements-important lib-bg";
 					row_class += data[j].account_name ? "" : " financial-statements-blank-row";
 				%}
+				{{(row.is_total_row)}}
+
 				{% if row.root_type == 'liability' %}
 					{% if row.account %}
-						{% lib_count = lib_count + 1 %}
+						{% if (row.account_name == "Total Liability (Credit)")  %}
+						{% for(let x=0, y=diff; x<y; x++ ) { %}
+						<tr>
+							<td colspan="4"><span>-</span></td>
+							
+						</tr>
+						{% } %}
+					
+						{%endif%}
 						<tr class="{%= row_class %}">
 							<td class="text-center">{{j}}</td>
 							<td class="text-center bold">
@@ -90,7 +125,7 @@
 									{% const fieldname = report_columns[i].fieldname; %}
 									{% if (!is_null(row[fieldname])) { %}
 										{% if (row.total) < 0 %}
-											<span class="bold" style="color: #f50;">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
+											<span class="bold" style="color: #970C10;">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
 										{% else %}
 											<span class="bold">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
 										{% endif %}
@@ -100,22 +135,8 @@
 						</tr>
 					{% endif %}
 				{% endif %}
-				{% if row.root_type == 'asset' %}
-					{% if row.account %}
-						{% ass_count = ass_count + 1 %}
-					{% endif %}
-				{% endif %}
 			{% } %}
-			{% var diff = ass_count - lib_count; %}
-			{% if ass_count > lib_count %}
-				{% for(let i=1, j=diff; i<=j; i++ ) { %}
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				{% } %}
-			{% endif %}
+
 		</tbody>
 	</table>
 
@@ -129,7 +150,7 @@
 				<th class="text-center asset-bg">{%= __("No.") %}</th>
 				<th class="text-center asset-bg">{%= __("Current Assets") %}</th>
 				{% for (let i=1, l=report_columns.length; i<l; i++) { %}
-					<th class="text-right" style="background-color: #CDC6CF !important;">{%= report_columns[i].label %}</th>
+					<th class="text-right" style="background-color: #CDC6CF !important; color: #222 !important;">{%= report_columns[i].label %}</th>
 				{% } %}
 			</tr>
 		</thead>
@@ -147,7 +168,6 @@
 				%}
 				{% if row.root_type == 'asset' %}
 					{% if row.account %}
-						{% ass2_count = ass2_count + 1 %}
 						<tr class="{%= row_class %}">
 							<td class="text-center">{{j+1}}</td>
 							<td class="text-center bold">
@@ -158,7 +178,7 @@
 									{% const fieldname = report_columns[i].fieldname; %}
 									{% if (!is_null(row[fieldname])) { %}
 										{% if (row.total) < 0 %}
-											<span class="bold" style="color: #f50;">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
+											<span class="bold" style="color: #970C10;">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
 										{% else %}
 											<span class="bold">{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}</span>
 										{% endif %}
@@ -168,22 +188,8 @@
 						</tr>
 					{% endif %}
 				{% endif %}
-				{% if row.root_type == 'liability' %}
-					{% if row.account %}
-						{% lib2_count = lib2_count + 1 %}
-					{% endif %}
-				{% endif %}
 			{% } %}
-			{% var diff2 = lib2_count - ass2_count; %}
-			{% if lib2_count > ass2_count %}
-				{% for(let i=1, j=diff2; i<=j; i++ ) { %}
-					<tr>
-						<td></td>
-						<td></td>
-						<td></td>
-					</tr>
-				{% } %}
-			{% endif %}
+
 		</tbody>
 	</table>
 </div>
