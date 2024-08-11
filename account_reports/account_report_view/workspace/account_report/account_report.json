@@ -1,0 +1,43 @@
+{
+ "charts": [],
+ "content": "[{\"id\":\"F1TbfGnOUT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Account Report</span>\",\"col\":12}},{\"id\":\"V7VvQhRAYX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assets and Liabilities Sheet\",\"col\":3}},{\"id\":\"WKjqlNOETV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Annual Trial Balance\",\"col\":3}}]",
+ "creation": "2024-08-11 19:53:59.380167",
+ "custom_blocks": [],
+ "docstatus": 0,
+ "doctype": "Workspace",
+ "for_user": "",
+ "hide_custom": 0,
+ "idx": 0,
+ "indicator_color": "green",
+ "is_hidden": 0,
+ "label": "Account Report",
+ "links": [],
+ "modified": "2024-08-11 19:54:40.195807",
+ "modified_by": "Administrator",
+ "module": "Account Report View",
+ "name": "Account Report",
+ "number_cards": [],
+ "owner": "Administrator",
+ "parent_page": "Accounting",
+ "public": 1,
+ "quick_lists": [],
+ "roles": [],
+ "sequence_id": 39.0,
+ "shortcuts": [
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Assets and Liabilities Sheet",
+   "link_to": "Assets and Liabilities Sheet",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Annual Trial Balance",
+   "link_to": "Annual Trial Balance",
+   "type": "Report"
+  }
+ ],
+ "title": "Account Report"
+}
