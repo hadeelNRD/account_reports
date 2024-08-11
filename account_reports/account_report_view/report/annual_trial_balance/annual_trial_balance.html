@@ -1,0 +1,84 @@
+{%
+	var report_columns = report.get_columns_for_print();
+	report_columns = columns || report_columns.filter(col => !col.hidden);
+
+%}
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Noto+Naskh+Arabic:wght@400..700&family=Tajawal:wght@200;300;400;500;700;800;900&family=Zain:wght@200;300;400;700;800;900&display=swap" rel="stylesheet"><div class="page-break" style="display: flex; flex-direction: column;">
+
+<style>
+    *{
+        font-family: "Noto Naskh Arabic", serif!important;
+        font-optical-sizing: auto!important;
+        font: weight 800px !important;;
+        font-style: normal!important;
+    }
+	.financial-statements-important td {
+		font-weight: bold;
+	}
+
+	.financial-statements-blank-row td {
+		height: 37px;
+	}
+	
+	.print-format th.red,
+    .print-format td.red{
+        background-color: #3BAB5A !important;
+        color: #171717 !important;
+    }
+    .print-format th.green,
+    .print-format td.green{
+        background-color: #ECF87F !important;
+        color: #171717 !important;
+    }
+    .print-format th.orange,
+    .print-format td.orange{
+        background-color: #97D49B !important;
+        color: #171717 !important;
+    }
+	.print-format.landscape{
+		padding-left: 0.3in;
+		padding-right: 0.3in;
+	}
+</style>
+
+<h2 class="text-center">{%= __(report.report_name) %} : {%= filters.fiscal_year %}</h2>
+<hr>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center green">{%= __("Account Name") %}</th>
+			{% for (let i=1, l=report_columns.length; i<l; i++) { %}
+				<th class="text-center {%= report_columns[i].fieldname %} {%= report_columns[i].fieldname.startsWith('debit')? 'red': report_columns[i].fieldname.startsWith('credit')?'red': '' %}">{%= report_columns[i].label %}</th>
+			{% } %}
+		</tr>
+	</thead>
+	<tbody>
+		{% for(let j=0, k=data.length; j<k; j++) { %}
+			{%
+				var row = data[j];
+				var row_class = data[j].parent_account ? "" : "financial-statements-important";
+				row_class += data[j].account_name ? "" : " financial-statements-blank-row";
+			%}
+			<tr class="{%= row_class %}">
+				<td class="text-center">
+					<span>{%= row.account_name %}</span>
+				</td>
+				{% for(let i=1, l=report_columns.length; i<l; i++) { %}
+                    {% const fieldname = report_columns[i].fieldname; %}
+					<td class="text-center {%= report_columns[i].fieldname.startsWith('debit')? 'orange': '' %} {%= report_columns[i].fieldname.startsWith('credit')? 'green': '' %}">
+						{% if (!is_null(row[fieldname])) { %}
+							{%= frappe.format(row[fieldname], report_columns[i], {}, row) %}
+						{% } else { %}
+							{%= "0" %}
+						{% } %}
+					</td>
+				{% } %}
+			</tr>
+		{% } %}
+	</tbody>
+</table>
+<p class="text-right text-muted">
+	Printed On {%= frappe.datetime.str_to_user(frappe.datetime.get_datetime_as_string()) %}
+</p>
