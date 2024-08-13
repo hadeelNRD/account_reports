@@ -20,7 +20,8 @@
     }
     .financial-statements-important td {
 		font-weight: bold;
-	}
+		background-color: #003B73 !important;
+		color: #BFD7ED !important;	}
 	table tbody tr {
 		height: 30px !important;
 		max-height: 30px !important;
@@ -35,11 +36,11 @@
 		align-items: flex-start;
 	}
 	.asset-bg, .print-format th.asset-bg{
-		background-color: #738580 !important;
+		background-color: #60A3D9 !important;
 		color: #222 !important;
 	}
 	.lib-bg, .print-format th.lib-bg{
-		background-color: #BFCAD0 !important;
+		background-color: #60A3D9 !important;
 		color: #222 !important;
 	}
 	.table-bordered > thead > tr > th, .table-bordered > tbody > tr > td{
@@ -47,6 +48,10 @@
 	}
 	.bold{
 		font-weight: bolder !important;
+	}
+	.head-table{
+		background-color: #003B73 !important;
+		color: #BFD7ED !important;
 	}
 </style>
 <hr>
@@ -57,13 +62,13 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="100" class="text-center lib-bg">{%= __("Liabilities")%}</th>
+				<th colspan="100" class="text-center  head-table">{%= __("Liabilities")%}</th>
 			</tr>
 			<tr>
 				<th class="text-center lib-bg">{%= __("No.") %}</th>
-				<th class="text-center lib-bg">{%= __("Short Term Liabilities") %}</th>
+				<th class="text-center lib-bg">{%= __("Account") %}</th>
 				{% for (let i=1, l=report_columns.length; i<l; i++) { %}
-					<th class="text-right" style="background-color: #CDC6CF !important; color: #222 !important;">{%= report_columns[i].label %}</th>
+					<th class="text-right" style="background-color: #BFD7ED !important; color: #222 !important;">{%= report_columns[i].label %}</th>
 				{% } %}
 			</tr>
 		</thead>
@@ -144,13 +149,13 @@
 	<table class="table table-bordered">
 		<thead>
 			<tr>
-				<th colspan="100" class="text-center asset-bg">{%= __("Assets")%}</th>
+				<th colspan="100" class="text-center  head-table">{%= __("Assets")%}</th>
 			</tr>
 			<tr>
 				<th class="text-center asset-bg">{%= __("No.") %}</th>
-				<th class="text-center asset-bg">{%= __("Current Assets") %}</th>
+				<th class="text-center asset-bg">{%= __("Account") %}</th>
 				{% for (let i=1, l=report_columns.length; i<l; i++) { %}
-					<th class="text-right" style="background-color: #CDC6CF !important; color: #222 !important;">{%= report_columns[i].label %}</th>
+					<th class="text-right" style="background-color: #BFD7ED !important; color: #222 !important;">{%= report_columns[i].label %}</th>
 				{% } %}
 			</tr>
 		</thead>
