@@ -114,9 +114,9 @@ app_license = "mit"
 # ---------------
 # Override standard doctype classes
 
-# override_doctype_class = {
-# 	"ToDo": "custom_app.overrides.CustomToDo"
-# }
+override_doctype_class = {
+	"Landed Cost Voucher": "account_reports.override.py.landed_cost_voucher.custom_LandedCostVoucher"
+}
 
 # Document Events
 # ---------------
@@ -162,7 +162,12 @@ app_license = "mit"
 # override_whitelisted_methods = {
 # 	"frappe.desk.doctype.event.event.get_events": "account_reports.event.get_events"
 # }
-#
+
+# override_whitelisted_methods = {
+#     "erpnext.stock.doctype.landed_cost_voucher.landed_cost_voucher.get_items_from_purchase_receipts": "account_reports.event.get_items_from_purchase_receipts",
+# }
+
+
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
 # along with any modifications made in other Frappe apps

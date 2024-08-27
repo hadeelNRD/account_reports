@@ -1,18 +1,19 @@
 {
  "charts": [],
- "content": "[{\"id\":\"F1TbfGnOUT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Account Report</span>\",\"col\":12}},{\"id\":\"V7VvQhRAYX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assets and Liabilities Sheet\",\"col\":3}},{\"id\":\"3X0Ph-buJq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trial Balance\",\"col\":3}},{\"id\":\"WKjqlNOETV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Annual Trial Balance\",\"col\":3}}]",
+ "content": "[{\"id\":\"F1TbfGnOUT\",\"type\":\"header\",\"data\":{\"text\":\"<span class=\\\"h4\\\">Account Report</span>\",\"col\":12}},{\"id\":\"V7VvQhRAYX\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Assets and Liabilities Sheet\",\"col\":3}},{\"id\":\"3X0Ph-buJq\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Trial Balance\",\"col\":3}},{\"id\":\"WKjqlNOETV\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Annual Trial Balance\",\"col\":3}},{\"id\":\"yhtYAfJc6l\",\"type\":\"shortcut\",\"data\":{\"shortcut_name\":\"Profit and Loss\",\"col\":3}}]",
  "creation": "2024-08-11 19:53:59.380167",
  "custom_blocks": [],
  "docstatus": 0,
  "doctype": "Workspace",
  "for_user": "",
  "hide_custom": 0,
+ "icon": "table_2",
  "idx": 0,
- "indicator_color": "green",
+ "indicator_color": "",
  "is_hidden": 0,
  "label": "Account Report",
  "links": [],
- "modified": "2024-08-11 23:01:08.595385",
+ "modified": "2024-08-27 16:51:45.600697",
  "modified_by": "Administrator",
  "module": "Account Report View",
  "name": "Account Report",
@@ -29,6 +30,13 @@
    "doc_view": "List",
    "label": "Assets and Liabilities Sheet",
    "link_to": "Assets and Liabilities Sheet",
+   "type": "Report"
+  },
+  {
+   "color": "Grey",
+   "doc_view": "List",
+   "label": "Profit and Loss",
+   "link_to": "Profit and Loss",
    "type": "Report"
   },
   {
