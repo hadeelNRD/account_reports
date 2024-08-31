@@ -195,7 +195,13 @@
                   {%= __("Profitt/Loss ")%}
                 </th>
                 <th colspan="3" class="Profitt-loss" >
-					{%= format_currency(inc_total - exp_total)%}
+					{% if (inc_total - exp_total) < 0 %}
+					<span class="bold" style="color: #cf6c6f;">{%= format_currency(inc_total - exp_total)%}</span>
+				{% else %}
+					<span class="bold">{%= format_currency(inc_total - exp_total)%}</span>
+					{% var inc_total =  row.total %}
+				{% endif %}
+					
                 </th>
             </tr>
 		</tbody>
