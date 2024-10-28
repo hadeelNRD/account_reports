@@ -1,0 +1,45 @@
+<style>
+    
+    .print-format th.colored ,
+    .print-format td.colored {
+        background-color: #BFD7ED !important
+    }
+</style>
+
+
+<h2 class="text-center" style="color: #003B73;">{%= __("Statement of Account") %}</h2>
+<h3 class="text-center" style="color: #003B73;">{%= __("Bank account balances on ") %} {%= frappe.datetime.get_today() %}</h3>
+
+<hr>
+<table class="table table-bordered">
+	<thead>
+		<tr>
+			<th class="text-center colored">{%= __("Statement") %}</th>
+			<th class="text-center colored">{%= __("Attach Number") %}</th>
+			<th class="text-center colored">{%= __("Value") %}</th>
+		</tr>
+	</thead>
+	<tbody>
+		{% for(let j=0, k=data.length-1; j<k; j++) { %}
+			{%
+				var row = data[j];
+			%}
+			<tr >
+                <td class="text-center">{%= row["account_name"] %} 
+                    {% if (!is_null(row["account_number"])) { %}
+                        {%= "<b>Account Number</b> - " +  row["account_number"] %}
+                    {% } %}
+                </td>
+                <td class="text-center">{%= row["attach_no"] %}</td>
+                <td class="text-center">{%= row["balance"] %}</td>
+			</tr>
+		{% } %}
+        {%
+            var total_row = data[data.length-1];
+        %}
+        <tr>
+            <td class="text-center colored" colspan="2">{%= __("Total") %}</td>
+            <td class="text-center colored">{%= total_row["balance"] %}</td>
+        </tr>
+	</tbody>
+</table>
